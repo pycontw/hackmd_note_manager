@@ -1,0 +1,14 @@
+{
+    "使用 Pyodide 讓你在瀏覽器中直接運行 Python - 以醫療數位影像 DICOM 視覺化為例 - Grimmer Kang": {
+        "slido_1": "https://app.sli.do/event/gk1xvgcv",
+        "slido_2": "https://wall.sli.do/event/gk1xvgcv?section=0db68317-afa2-429b-b4bb-d6f64888efcd",
+        "ppt": "https://slides.com/grimmer/intro_pyodide_medical_dicom_viewer",
+        "vedio": "https://www.youtube.com/watch?v=Wk6sePJb26o"
+    },
+    "test": {
+        "slido_1": "https://app.sli.do/event/gk1xvgcv",
+        "slido_2": "https://wall.sli.do/event/gk1xvgcv?section=0db68317-afa2-429b-b4bb-d6f64888efcd",
+        "ppt": "https://slides.com/grimmer/intro_pyodide_medical_dicom_viewer",
+        "vedio": "https://www.youtube.com/watch?v=Wk6sePJb26o"
+    }
+}
