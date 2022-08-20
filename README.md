@@ -17,9 +17,11 @@ Frontend of PyCon TW official website.
 2. Make folder log.
 
 3. Make file .env and add Environment Variables to configure this project:
-    TEAM_PATH= pycontw
-    TOKEN= {{your hackmd token}}
-    HACKMD_API_URL = https://api.hackmd.io/v1/
+    ```
+    TEAM_PATH=pycontw
+    TOKEN={{your hackmd token}}
+    HACKMD_API_URL=https://api.hackmd.io/v1/
+    ```
 
 4. Install dependencies:
 
