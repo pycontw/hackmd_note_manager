@@ -29,6 +29,7 @@ def create_collabwriting(note_info: json, template_path: str) -> str:
     return _get_note_template(file_path=template_path).format(
         title=note_info["title"],
         slido_1=note_info["Slido"],
+        slide_link=note_info["slide"]
     )
 
 

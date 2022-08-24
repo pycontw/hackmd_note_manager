@@ -5,7 +5,7 @@ tags: PyConAPAC2022, 2022-organize
 PyCon APAC 2022 共同筆記
 ===
 
-- [歡迎來到 PyCon APAC 2022！](/@pycontw/SyFIvuGRc)
-- [PyCon APAC 2022 官方網站](https://tw.pycon.org/2022/zh-hant/) [target=_blank]
+- [Welcome to PyCon APAC 2022！](/@pycontw/SyFIvuGRc)
+- [PyCon APAC 2022 Official Website](https://tw.pycon.org/2022/zh-hant/) [target=_blank]
 - [HackMD 快速入門](https://hackmd.io/s/BJvtP4zGX)
 - [HackMD 會議功能介紹](https://hackmd.io/s/BJHWlNQMX)
