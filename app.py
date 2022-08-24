@@ -69,7 +69,7 @@ if __name__ == "__main__":
             last_note_info=last_note_info,
             template_path=collabwriting_each_session_template_path,
         )
-
+        print(collabwriting_content)
         last_note_info = note_info
 
     # make_team_collabwriting_toc = create_hackmd_note(
@@ -77,11 +77,9 @@ if __name__ == "__main__":
     #     content=collabwriting_toc_content,
     #     header=HEADER,
     # )
-    # hackmd_link = make_team_collabwriting_toc["publishLink"]
-    # note_info["HackMD"] = hackmd_link
     # log.append(make_team_collabwriting_toc)
 
-    print(collabwriting_toc_content)
+    # print(collabwriting_toc_content)
     create_log(log)
 
     output_file_name = "WIP_ 2022 Pre-CFP empty schedule.csv"

@@ -20,7 +20,7 @@ def create_hackmd_note(api_url: str, content: str, header) -> json:
     response = requests.post(api_url, headers=header, json=data)
 
     print(response)
-    print(response.json())
+    # print(response.json())
 
     return response.json()
 
@@ -29,7 +29,7 @@ def create_collabwriting(note_info: json, template_path: str) -> str:
     return _get_note_template(file_path=template_path).format(
         title=note_info["title"],
         slido_1=note_info["Slido"],
-        slide_link=note_info["slide"]
+        slide_link=note_info["slide"],
     )
 
 

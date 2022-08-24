@@ -13,8 +13,10 @@ def read_csv(file_path: str) -> json:
         for row in csvreader:
             row_json = {}
             for i in range(len(title)):
-                row_json[title[i]] = row[i]
-
+                try:
+                    row_json[title[i]] = row[i]
+                except:
+                    row_json[title[i]] = ""
             data.append(row_json)
 
         return {"title": title, "data": data}
