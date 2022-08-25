@@ -4,12 +4,14 @@ from dotenv import load_dotenv
 
 
 from utils.csv_handler import read_csv, write_csv
+from utils.json_handler import read_json
 from utils.log import create_log
 from utils.note import (
     create_collabwriting,
     create_collabwriting_toc,
     create_collabwriting_each_session,
     create_hackmd_note,
+    update_hackmd_note,
 )
 
 load_dotenv()
@@ -22,12 +24,14 @@ HEADER = {"Authorization": "Bearer " + TOKEN}
 TEMPLATE_PATH = "note_template/pycon_apac_2022/"
 NOTE_DATA_PATH = "note_data/"
 OUTPUT_PATH = "output/"
+LOG_PATH = "log/"
 
 API_URL_CREATE_USER_NOTE = HACKMD_API_URL + "notes"
 API_URL_CREATE_TEAM_NOTE = HACKMD_API_URL + "teams/" + TEAM_PATH + "/notes"
+API_URL_UPDATE_TEAM_NOTE = HACKMD_API_URL + "teams/" + TEAM_PATH + "/notes/"
 
 
-if __name__ == "__main__":
+def create_2022_collabwriting():
     note_data_file_name = "WIP_ 2022 Pre-CFP empty schedule.csv"
     note_data_file_path = NOTE_DATA_PATH + note_data_file_name
     note_data_info = read_csv(file_path=note_data_file_path)
@@ -85,3 +89,41 @@ if __name__ == "__main__":
     output_file_name = "WIP_ 2022 Pre-CFP empty schedule.csv"
     output_file_path = OUTPUT_PATH + output_file_name
     write_csv(file_path=output_file_path, title_items=notes_title, datas=notes_info)
+
+
+def update_2022_collabwriting():
+    note_data_file_name = "WIP_ 2022 Pre-CFP empty schedule.csv"
+    note_data_file_path = NOTE_DATA_PATH + note_data_file_name
+    note_data_info = read_csv(file_path=note_data_file_path)
+
+    notes_info = note_data_info["data"]
+
+    notes_info.sort(key=lambda x: (x["date"], x["begin_time"], x["type"], x["Room"]))
+
+    notes_log = read_json(LOG_PATH + "20220824-234052.json")
+
+    note_quantity = len(notes_info)
+
+    log = []
+
+    collabwriting_template_path = TEMPLATE_PATH + "collabwriting.md"
+
+    for note_index in range(note_quantity):
+        collabwriting_content = create_collabwriting(
+            note_info=notes_info[note_index], template_path=collabwriting_template_path
+        )
+        note_id = notes_log[note_index]["shortId"]
+
+        # update_team_collabwriting = update_hackmd_note(
+        #     api_url=API_URL_UPDATE_TEAM_NOTE + note_id,
+        #     content=collabwriting_content,
+        #     header=HEADER,
+        # )
+        # notes_log[note_index]["update_status"] = str(update_team_collabwriting)
+        # log.append(notes_log[note_index])
+
+    create_log(log)
+
+
+if __name__ == "__main__":
+    update_2022_collabwriting()

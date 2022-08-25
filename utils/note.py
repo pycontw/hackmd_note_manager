@@ -25,9 +25,26 @@ def create_hackmd_note(api_url: str, content: str, header) -> json:
     return response.json()
 
 
+def update_hackmd_note(api_url: str, content: str, header) -> str:
+
+    data = {
+        "title": None,
+        "content": content,
+        "readPermission": "guest",
+        "writePermission": "signed_in",
+    }
+    response = requests.patch(api_url, headers=header, json=data)
+
+    print(response)
+    # print(response.json())
+
+    return response
+
+
 def create_collabwriting(note_info: json, template_path: str) -> str:
     return _get_note_template(file_path=template_path).format(
         title=note_info["title"],
+        name=note_info["name"],
         slido_1=note_info["Slido"],
         slide_link=note_info["slide"],
     )
