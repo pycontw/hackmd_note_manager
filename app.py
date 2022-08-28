@@ -31,7 +31,7 @@ API_URL_CREATE_TEAM_NOTE = HACKMD_API_URL + "teams/" + TEAM_PATH + "/notes"
 API_URL_UPDATE_TEAM_NOTE = HACKMD_API_URL + "teams/" + TEAM_PATH + "/notes/"
 
 
-def create_2022_collabwriting():
+def get_2022_collabwriting() -> dict:
     note_data_file_name = "WIP_ 2022 Pre-CFP empty schedule.csv"
     note_data_file_path = NOTE_DATA_PATH + note_data_file_name
     note_data_info = read_csv(file_path=note_data_file_path)
@@ -41,6 +41,10 @@ def create_2022_collabwriting():
 
     notes_info.sort(key=lambda x: (x["date"], x["begin_time"], x["type"], x["Room"]))
 
+    return {"notes_title": notes_title, "notes_info": notes_info}
+
+
+def create_2022_collabwriting(notes_title: list, notes_info: list) -> None:
     log = []
 
     collabwriting_template_path = TEMPLATE_PATH + "collabwriting.md"
@@ -73,7 +77,7 @@ def create_2022_collabwriting():
             last_note_info=last_note_info,
             template_path=collabwriting_each_session_template_path,
         )
-        print(collabwriting_content)
+        # print(collabwriting_content)
         last_note_info = note_info
 
     # make_team_collabwriting_toc = create_hackmd_note(
@@ -86,20 +90,8 @@ def create_2022_collabwriting():
     # print(collabwriting_toc_content)
     create_log(log)
 
-    output_file_name = "WIP_ 2022 Pre-CFP empty schedule.csv"
-    output_file_path = OUTPUT_PATH + output_file_name
-    write_csv(file_path=output_file_path, title_items=notes_title, datas=notes_info)
 
-
-def update_2022_collabwriting():
-    note_data_file_name = "WIP_ 2022 Pre-CFP empty schedule.csv"
-    note_data_file_path = NOTE_DATA_PATH + note_data_file_name
-    note_data_info = read_csv(file_path=note_data_file_path)
-
-    notes_info = note_data_info["data"]
-
-    notes_info.sort(key=lambda x: (x["date"], x["begin_time"], x["type"], x["Room"]))
-
+def update_2022_collabwriting(notes_info: list) -> None:
     notes_log = read_json(LOG_PATH + "20220824-234052.json")
 
     note_quantity = len(notes_info)
@@ -113,7 +105,7 @@ def update_2022_collabwriting():
             note_info=notes_info[note_index], template_path=collabwriting_template_path
         )
         note_id = notes_log[note_index]["shortId"]
-
+        notes_info[note_index]["HackMD"] = notes_log[note_index]["publishLink"]
         # update_team_collabwriting = update_hackmd_note(
         #     api_url=API_URL_UPDATE_TEAM_NOTE + note_id,
         #     content=collabwriting_content,
@@ -125,5 +117,17 @@ def update_2022_collabwriting():
     create_log(log)
 
 
+def output_2022_collabwriting(notes_title: list, notes_info: list) -> None:
+    output_file_name = "WIP_ 2022 Pre-CFP empty schedule.csv"
+    output_file_path = OUTPUT_PATH + output_file_name
+    write_csv(file_path=output_file_path, title_items=notes_title, datas=notes_info)
+
+
 if __name__ == "__main__":
-    update_2022_collabwriting()
+    note_data = get_2022_collabwriting()
+    notes_title = note_data["notes_title"]
+    notes_info = note_data["notes_info"]
+
+    update_2022_collabwriting(notes_info)
+
+    output_2022_collabwriting(notes_title, notes_info)
