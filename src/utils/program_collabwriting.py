@@ -1,12 +1,13 @@
-from src.utils.hackmd_note import create_hackmd_note, update_hackmd_note
 from src.utils.log import create_log
 from src.utils.json_handler import read_json
 from src.utils.note_template import get_note_template
+from src.utils.hackmd_note import HackmdNote
 
 
 class ProgramCollabwriting:
     def __init__(
         self,
+        hackmd_note: HackmdNote,
         template_storage_path: str,
         notes_title: list,
         notes_content: list,
@@ -16,6 +17,7 @@ class ProgramCollabwriting:
         self.__log_storage_path: str = log_storage_path
         self.__notes_title: list = notes_title
         self.__notes_content: list = notes_content
+        self.__hackmd_note: HackmdNote = hackmd_note
 
     def get_notes_content(self) -> list:
         return self.__notes_content
@@ -38,7 +40,7 @@ class ProgramCollabwriting:
                 slide_link=note_content["slide"],
             )
 
-            create_program_collabwriting_result = create_hackmd_note(
+            create_program_collabwriting_result = self.__hackmd_note.create_hackmd_note(
                 content=collabwriting_content,
             )
             hackmd_link = create_program_collabwriting_result["publishLink"]
@@ -77,7 +79,7 @@ class ProgramCollabwriting:
             # print(collabwriting_content)
             last_note_content = note_content
 
-        make_team_collabwriting_toc = create_hackmd_note(
+        make_team_collabwriting_toc = self.__hackmd_note.create_hackmd_note(
             content=collabwriting_toc_content,
         )
         log.append(make_team_collabwriting_toc)
@@ -169,7 +171,7 @@ class ProgramCollabwriting:
             self.__notes_content[note_index]["HackMD"] = notes_log[note_index][
                 "publishLink"
             ]
-            update_team_collabwriting = update_hackmd_note(
+            update_team_collabwriting = self.__hackmd_note.update_hackmd_note(
                 note_id=note_id,
                 content=collabwriting_content,
             )
