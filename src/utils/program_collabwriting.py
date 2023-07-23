@@ -1,7 +1,7 @@
-from src.utils.log import create_log
-from src.utils.json_handler import read_json
-from src.utils.note_template import get_note_template
 from src.utils.hackmd_note import HackmdNote
+from src.utils.json_handler import read_json
+from src.utils.log import create_log
+from src.utils.note_template import get_note_template
 from src.utils.url_processor import join_url
 
 
@@ -160,33 +160,29 @@ class ProgramCollabwriting:
             )
         )
 
-        note_quantity = len(self.__notes_content)
-
         log = []
 
         collabwriting_template_path = join_url(
             base_url=self.__template_storage_path, relative_url="collabwriting.md"
         )
 
-        for note_index in range(note_quantity):
+        for i, note_content in enumerate(self.__notes_content):
             collabwriting_content = get_note_template(
                 file_path=collabwriting_template_path
             ).format(
-                title=self.__notes_content[note_index]["title"],
-                name=self.__notes_content[note_index]["name"],
-                slido_1=self.__notes_content[note_index]["Slido"],
-                slide_link=self.__notes_content[note_index]["slide"],
+                title=note_content["title"],
+                name=note_content["name"],
+                slido_1=note_content["Slido"],
+                slide_link=note_content["slide"],
             )
-            note_id = notes_log[note_index]["shortId"]
-            self.__notes_content[note_index]["HackMD"] = notes_log[note_index][
-                "publishLink"
-            ]
+            note_id = notes_log[i]["shortId"]
+            note_content["HackMD"] = notes_log[i]["publishLink"]
             update_team_collabwriting = self.__hackmd_note.update_hackmd_note(
                 note_id=note_id,
                 content=collabwriting_content,
             )
-            notes_log[note_index]["update_status"] = str(update_team_collabwriting)
-            log.append(notes_log[note_index])
+            notes_log[i]["update_status"] = str(update_team_collabwriting)
+            log.append(notes_log[i])
 
         create_log(
             log_storage_path=self.__log_storage_path,
