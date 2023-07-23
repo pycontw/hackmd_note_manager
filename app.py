@@ -13,22 +13,24 @@ from src.utils.note import (
     create_hackmd_note,
     update_hackmd_note,
 )
+from src.config.config import settings
 
 load_dotenv()
 
-TEAM_PATH = os.getenv("TEAM_PATH")
-TOKEN = os.getenv("TOKEN")
-HACKMD_API_URL = os.getenv("HACKMD_API_URL")
 
-HEADER = {"Authorization": "Bearer " + TOKEN}
+HEADER = {"Authorization": "Bearer " + settings.TOKEN}
 TEMPLATE_PATH = "note_template/pycon_apac_2022/"
 NOTE_DATA_PATH = "note_data/"
 OUTPUT_PATH = "output/"
 LOG_PATH = "log/"
 
-API_URL_CREATE_USER_NOTE = HACKMD_API_URL + "notes"
-API_URL_CREATE_TEAM_NOTE = HACKMD_API_URL + "teams/" + TEAM_PATH + "/notes"
-API_URL_UPDATE_TEAM_NOTE = HACKMD_API_URL + "teams/" + TEAM_PATH + "/notes/"
+API_URL_CREATE_USER_NOTE = settings.HACKMD_API_URL + "notes"
+API_URL_CREATE_TEAM_NOTE = (
+    settings.HACKMD_API_URL + "teams/" + settings.TEAM_PATH + "/notes"
+)
+API_URL_UPDATE_TEAM_NOTE = (
+    settings.HACKMD_API_URL + "teams/" + settings.TEAM_PATH + "/notes/"
+)
 
 
 def get_2022_collabwriting() -> dict:

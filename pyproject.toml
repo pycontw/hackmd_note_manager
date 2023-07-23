@@ -6,8 +6,9 @@ authors = ["Xiao75896453 <47842610+Xiao75896453@users.noreply.github.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-python-dotenv = "^0.20.0"
+python-dotenv = "^1.0.0"
 requests = "^2.28.1"
+pydantic-settings = "^2.0.2"
 
 [tool.poetry.dev-dependencies]
 black = {version = "^22.6.0", allow-prereleases = true}
