@@ -20,7 +20,6 @@ Frontend of PyCon TW official website.
     ```
     TEAM_PATH=pycontw
     TOKEN={{your hackmd token}}
-    HACKMD_API_URL=https://api.hackmd.io/v1/
     ```
 4. Install poetry
 
