@@ -7,23 +7,25 @@ def read_csv(file_path: str) -> json:
     with open(file_path, "r", encoding="utf-8-sig") as file:
         csvreader = list(csv.reader(file))
 
-        title = csvreader.pop(0)
+        titles = csvreader.pop(0)
 
         for row in csvreader:
             row_json = {}
-            for i in range(len(title)):
+            for i, title in enumerate(titles):
                 try:
-                    row_json[title[i]] = row[i]
+                    row_json[title] = row[i]
                 except:
-                    row_json[title[i]] = ""
+                    row_json[title] = ""
             data.append(row_json)
 
-        return {"title": title, "data": data}
+        return {"title": titles, "data": data}
 
 
 def write_csv(file_path: str, title_items: list, datas: list):
-    with open(file_path, "w", newline="", encoding="utf-8-sig") as f:
+    with open(file_path, "w", newline="", encoding="utf-8-sig") as file:
         title = title_items
-        cw = csv.DictWriter(f, title, delimiter=",", quoting=csv.QUOTE_MINIMAL)
-        cw.writeheader()
-        cw.writerows(datas)
+        csv_writer = csv.DictWriter(
+            file, title, delimiter=",", quoting=csv.QUOTE_MINIMAL
+        )
+        csv_writer.writeheader()
+        csv_writer.writerows(datas)
