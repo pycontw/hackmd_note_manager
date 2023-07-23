@@ -1,6 +1,8 @@
 ---
 title: PyCon APAC 2022 共同筆記
 tags: PyConAPAC2022, 2022-organize
+readPermission: guest,
+writePermission: signed_in
 ---
 PyCon APAC 2022 共同筆記
 ===

@@ -18,7 +18,7 @@ def execute_program_collabwriting_2022(hackmd_note: HackmdNote):
         hackmd_note=hackmd_note,
         template_storage_path=TEMPLATE_STORAGE_PATH_2022,
         notes_title=program_info_title,
-        notes_content=program_info_content[],
+        notes_content=program_info_content,
     )
 
     program_collabwriting_2022.create_program_collabwriting()

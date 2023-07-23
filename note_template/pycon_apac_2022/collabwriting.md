@@ -1,6 +1,8 @@
 ---
 title: "{title} - {name}"
 tags: PyConAPAC2022, 2022-organize, 2022-共筆
+readPermission: guest,
+writePermission: signed_in
 ---
 
 # {title} - {name}
