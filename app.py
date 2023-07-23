@@ -1,14 +1,18 @@
-from src.collabwriting.app import (
-    get_collabwriting,
-    update_collabwriting,
-    output_collabwriting,
+from src.api.program_collabwriting_2022.app import (
+    raed_2022_program_collabwriting_csv,
+    write_2022_program_collabwriting_csv,
+    create_2022_program_collabwriting,
+    create_2022_program_collabwriting_toc,
 )
 
 if __name__ == "__main__":
-    note_data = get_collabwriting()
+    note_data = raed_2022_program_collabwriting_csv()
     notes_title = note_data["notes_title"]
-    notes_info = note_data["notes_info"]
-
-    update_collabwriting(notes_info)
-
-    output_collabwriting(notes_title, notes_info)
+    notes_content = note_data["notes_content"]
+    notes_content = create_2022_program_collabwriting(notes_content=notes_content[:2])
+    write_2022_program_collabwriting_csv(
+        notes_title=notes_title, notes_content=notes_content
+    )
+    create_2022_program_collabwriting_toc(
+        notes_title=notes_title, notes_content=notes_content[:2]
+    )
