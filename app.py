@@ -11,8 +11,8 @@ def execute_program_collabwriting_2022(hackmd_note: HackmdNote):
     TEMPLATE_STORAGE_PATH_2022 = "note_template/pycon_apac_2022/"
 
     program_info = raed_program_from_csv(read_file_path=PROGRAM_CSV_PATH_2022)
-    program_info_title = program_info["notes_title"]
-    program_info_content = program_info["notes_content"]
+    program_info_title = program_info.notes_title
+    program_info_content = program_info.notes_content
 
     program_collabwriting_2022 = ProgramCollabwriting(
         hackmd_note=hackmd_note,
