@@ -18,7 +18,7 @@ def execute_program_collabwriting_2022(hackmd_note: HackmdNote):
         hackmd_note=hackmd_note,
         template_storage_path=TEMPLATE_STORAGE_PATH_2022,
         notes_title=program_info_title,
-        notes_content=program_info_content[:2],
+        notes_content=program_info_content[],
     )
 
     program_collabwriting_2022.create_program_collabwriting()
@@ -37,6 +37,6 @@ if __name__ == "__main__":
         base_url="teams", relative_url=settings.TEAM_PATH
     )
 
-    hackmd_note = HackmdNote(hackmd_api_route=HACKMD_API_USER_API_ROUTE)
+    hackmd_note = HackmdNote(hackmd_api_route=HACKMD_API_TEAMS_API_ROUTE)
 
     execute_program_collabwriting_2022(hackmd_note=hackmd_note)
