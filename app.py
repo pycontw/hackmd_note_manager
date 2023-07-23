@@ -1,7 +1,5 @@
 import os
 
-from dotenv import load_dotenv
-
 
 from src.utils.csv_handler import read_csv, write_csv
 from src.utils.json_handler import read_json
@@ -15,14 +13,9 @@ from src.utils.note import (
 )
 from src.config.config import settings
 
-load_dotenv()
-
 
 HEADER = {"Authorization": "Bearer " + settings.TOKEN}
 TEMPLATE_PATH = "note_template/pycon_apac_2022/"
-NOTE_DATA_PATH = "note_data/"
-OUTPUT_PATH = "output/"
-LOG_PATH = "log/"
 
 API_URL_CREATE_USER_NOTE = settings.HACKMD_API_URL + "notes"
 API_URL_CREATE_TEAM_NOTE = (
@@ -35,7 +28,7 @@ API_URL_UPDATE_TEAM_NOTE = (
 
 def get_2022_collabwriting() -> dict:
     note_data_file_name = "WIP_ 2022 Pre-CFP empty schedule.csv"
-    note_data_file_path = NOTE_DATA_PATH + note_data_file_name
+    note_data_file_path = settings.NOTE_DATA_PATH + note_data_file_name
     note_data_info = read_csv(file_path=note_data_file_path)
 
     notes_title = note_data_info["title"]
@@ -94,7 +87,7 @@ def create_2022_collabwriting(notes_title: list, notes_info: list) -> None:
 
 
 def update_2022_collabwriting(notes_info: list) -> None:
-    notes_log = read_json(LOG_PATH + "20220824-234052.json")
+    notes_log = read_json(settings.LOG_PATH + "20220824-234052.json")
 
     note_quantity = len(notes_info)
 
@@ -121,7 +114,7 @@ def update_2022_collabwriting(notes_info: list) -> None:
 
 def output_2022_collabwriting(notes_title: list, notes_info: list) -> None:
     output_file_name = "WIP_ 2022 Pre-CFP empty schedule.csv"
-    output_file_path = OUTPUT_PATH + output_file_name
+    output_file_path = settings.OUTPUT_PATH + output_file_name
     write_csv(file_path=output_file_path, title_items=notes_title, datas=notes_info)
 
 
