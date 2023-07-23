@@ -9,7 +9,6 @@ def _get_note_template(file_path: str) -> str:
 
 
 def create_hackmd_note(api_url: str, content: str, header) -> json:
-
     data = {
         "title": None,
         "content": content,
@@ -26,7 +25,6 @@ def create_hackmd_note(api_url: str, content: str, header) -> json:
 
 
 def update_hackmd_note(api_url: str, content: str, header) -> str:
-
     data = {
         "title": None,
         "content": content,
