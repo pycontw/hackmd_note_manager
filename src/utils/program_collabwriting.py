@@ -2,6 +2,7 @@ from src.utils.log import create_log
 from src.utils.json_handler import read_json
 from src.utils.note_template import get_note_template
 from src.utils.hackmd_note import HackmdNote
+from src.utils.url_processor import join_url
 
 
 class ProgramCollabwriting:
@@ -28,7 +29,9 @@ class ProgramCollabwriting:
     def create_program_collabwriting(self) -> None:
         log = []
 
-        collabwriting_template_path = self.__template_storage_path + "collabwriting.md"
+        collabwriting_template_path = join_url(
+            base_url=self.__template_storage_path, relative_url="collabwriting.md"
+        )
 
         for note_content in self.__notes_content:
             collabwriting_content = get_note_template(
@@ -59,8 +62,8 @@ class ProgramCollabwriting:
     def create_program_collabwriting_toc(self) -> None:
         log = []
 
-        collabwriting_toc_template_path = (
-            self.__template_storage_path + "collabwriting_toc.md"
+        collabwriting_toc_template_path = join_url(
+            base_url=self.__template_storage_path, relative_url="collabwriting_toc.md"
         )
 
         collabwriting_toc_content = get_note_template(
@@ -102,8 +105,9 @@ class ProgramCollabwriting:
     def __get_program_collabwriting_toc_each_session(
         self, note_content: dict, last_note_content: dict
     ) -> str:
-        collabwriting_toc_each_session_template_path = (
-            self.__template_storage_path + "collabwriting_toc_each_session.md"
+        collabwriting_toc_each_session_template_path = join_url(
+            base_url=self.__template_storage_path,
+            relative_url="collabwriting_toc_each_session.md",
         )
 
         note_date = ""
@@ -150,13 +154,19 @@ class ProgramCollabwriting:
         )
 
     def update_program_collabwriting(self, notes_log_file_nane: str) -> None:
-        notes_log = read_json(self.__log_storage_path + notes_log_file_nane)
+        notes_log = read_json(
+            file_name=join_url(
+                base_url=self.__log_storage_path, relative_url=notes_log_file_nane
+            )
+        )
 
         note_quantity = len(self.__notes_content)
 
         log = []
 
-        collabwriting_template_path = self.__template_storage_path + "collabwriting.md"
+        collabwriting_template_path = join_url(
+            base_url=self.__template_storage_path, relative_url="collabwriting.md"
+        )
 
         for note_index in range(note_quantity):
             collabwriting_content = get_note_template(
